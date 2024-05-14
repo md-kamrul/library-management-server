@@ -62,6 +62,28 @@ async function run() {
             res.send(result);
           })
 
+          app.put('/addBook/:id', async (req, res) => {
+            const id = req.params.id;
+            const filter = { _id: new ObjectId(id) }
+            const options = { upsert: true }
+            const updateInfo = req.body;
+            const info = {
+              $set: {
+                email: updateInfo.email,
+                image: updateInfo.image,
+                book_name: updateInfo.book_name,
+                author_name: updateInfo.author_name,
+                category: updateInfo.category,
+                quantity: updateInfo.quantity,
+                short_description: updateInfo.short_description,
+                rating: updateInfo.rating,
+                book_content: updateInfo.book_content,
+              }
+            }
+            const result = await addBookListCollection.updateOne(filter, info, options);
+            res.send(result);
+          })
+
         // Connect the client to the server	(optional starting in v4.7)
         // await client.connect();
         // Send a ping to confirm a successful connection
