@@ -35,6 +35,7 @@ async function run() {
   try {
 
     const addBookListCollection = client.db("libraryBookListDB").collection("libraryBookList");
+    const bookBorrowListCollection = client.db("libraryBookListDB").collection("bookBorrowList");
 
     app.get('/addBook', async (req, res) => {
       const cursor = addBookListCollection.find();
@@ -45,6 +46,12 @@ async function run() {
     app.post('/addBook', async (req, res) => {
       const addBook = req.body;
       const result = await addBookListCollection.insertOne(addBook);
+      res.send(result);
+    })
+
+    app.post('/borrowBook', async (req, res) => {
+      const borrowBook = req.body;
+      const result = await bookBorrowListCollection.insertOne(borrowBook);
       res.send(result);
     })
 
