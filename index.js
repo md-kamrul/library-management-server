@@ -70,7 +70,7 @@ async function run() {
           quantity: updateInfo.quantity,
           short_description: updateInfo.short_description,
           rating: updateInfo.rating,
-          book_content: updateInfo.book_content,
+          book_content: updateInfo.book_content
         }
       }
       const result = await addBookListCollection.updateOne(filter, info, options);
