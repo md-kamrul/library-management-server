@@ -49,6 +49,12 @@ async function run() {
       res.send(result);
     })
 
+    app.get('/borrowBook', async (req, res) => {
+      const cursor = bookBorrowListCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    })
+
     app.post('/borrowBook', async (req, res) => {
       const borrowBook = req.body;
       const result = await bookBorrowListCollection.insertOne(borrowBook);
